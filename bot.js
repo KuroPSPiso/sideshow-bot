@@ -9,7 +9,7 @@ client.on('ready', () => {
 //handlemsg
 client.on('message', message => {
     //message.delete();
-    message.author.id();
+    message.channel.send(message.author.id());
     if (message.content === '/stats') {
     	message.channel.send('```' + 
                              'id: ' + message.author.id + '\n' +
