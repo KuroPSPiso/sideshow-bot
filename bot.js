@@ -1,9 +1,21 @@
 const Discord = require('discord.js');
+const mysql = require('mysql');
 const client = new Discord.Client();
+const dbCon = mysql.createConnection({
+  host: process.env.DB_SERVER,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_TOKEN
+});
 
 //connected
 client.on('ready', () => {
     console.log('向こうへ入るに!');
+});
+
+//connected
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
 });
 
 function updateUsername()
