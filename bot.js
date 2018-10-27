@@ -46,6 +46,9 @@ client.on('message', message => {
     else if (t_content.startsWith('/write ') === true){
         message.channel.send(t_content.substring(6));
     }
+    else if (t_content.startsWith('/UpdateList') === true){
+        message.channel.send('updating list');
+    }
 });
 
 //Token set via environment keys 
