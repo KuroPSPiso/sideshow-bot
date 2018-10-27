@@ -44,7 +44,7 @@ client.on('message', message => {
         message.replay("feature not yet available");
     }
     else if (t_content.startsWith('/write ') === true){
-        message.channel.send(t_content.substring(6, t_content.length - 7));
+        message.channel.send(t_content.substring(1, t_content.length - 1));
     }
 });
 
