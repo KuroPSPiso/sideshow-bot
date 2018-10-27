@@ -8,8 +8,13 @@ client.on('ready', () => {
 
 //handlemsg
 client.on('message', message => {
-    //message.delete();
-    message.channel.send(message.author.id);
+    if(message.author.id != 505756739652550656)
+    {
+        message.delete();
+    }
+    
+    //Debug
+    //message.channel.send(message.author.id);
     if (message.content === '/stats') {
     	message.channel.send('```' + 
                              'id: ' + message.author.id + '\n' +
