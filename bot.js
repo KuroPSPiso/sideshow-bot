@@ -6,6 +6,28 @@ client.on('ready', () => {
     console.log('向こうへ入るに!');
 });
 
+function updateUsername()
+{
+    return false;
+}
+
+function fetchUsername()
+{
+    message.reply(message.author.username);
+    return false;
+}
+
+function setDiscordIds(message)
+{
+    message.channel.send('updating list');
+    return false;
+}
+
+function addUser()
+{
+    return false;
+}
+
 //handlemsg
 client.on('message', message => {
     if(message.author.id != 505756739652550656)
@@ -41,13 +63,13 @@ client.on('message', message => {
         message.reply("feature not yet available");
     }
     else if (t_content === '/username') {
-    	message.reply(message.author.username);
+    	fetchUsername();
   	}
     else if (t_content.startsWith('/write ') === true){
         message.channel.send(t_content.substring(6));
     }
     else if (t_content.startsWith('/UpdateList') === true){
-        message.channel.send('updating list');
+        setDiscordIds(message);
     }
 });
 
