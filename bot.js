@@ -11,7 +11,7 @@ function updateUsername()
     return false;
 }
 
-function fetchUsername()
+function fetchUsername(message)
 {
     message.reply(message.author.username);
     return false;
@@ -63,7 +63,7 @@ client.on('message', message => {
         message.reply("feature not yet available");
     }
     else if (t_content === '/username') {
-    	fetchUsername();
+    	fetchUsername(message);
   	}
     else if (t_content.startsWith('/write ') === true){
         message.channel.send(t_content.substring(6));
