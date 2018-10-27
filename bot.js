@@ -9,7 +9,12 @@ client.on('ready', () => {
 //handlemsg
 client.on('message', message => {
     if (message.content === '/stats') {
-    	message.channel.send('```' + message.author.id + '\n```');
+    	message.channel.send('```' + 
+                             'id: ' + message.author.id + '\n' +
+                             'username: ' + message.author.username + '\n' +
+                             'discriminator: ' + message.author.discriminator + '\n' +
+                             'created at: ' + message.author.createdAt + '\n' +
+                             ```');
   	}
 });
 
