@@ -20,6 +20,8 @@ client.on('message', message => {
         message.delete();
     	message.channel.send('```css\n' +
                              'Info - write the following commands inbetween the brackets to check/update your information:' + '\n' + '\n' +
+                             '[/help] or [/h] ' + ' \n' +
+                             'to display this info monitor.' + ' \n' +' \n' +
                              '[/username] ' + ' \n' +
                              'to check your current ingame username' + ' \n' +' \n' +
                              '[/username <new username>] '  + ' \n' +
