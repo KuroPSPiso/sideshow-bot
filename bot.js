@@ -38,7 +38,7 @@ client.on('message', message => {
                              '```');
   	}
     else if (t_content.startsWith('/username ') === true){
-        message.replay("feature not yet available");
+        message.reply("feature not yet available");
     }
     else if (t_content === '/username') {
     	message.reply(message.author.username);
