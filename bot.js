@@ -8,6 +8,7 @@ client.on('ready', () => {
 
 //handlemsg
 client.on('message', message => {
+    message.delete();
     if (message.content === '/stats') {
     	message.channel.send('```' + 
                              'id: ' + message.author.id + '\n' +
@@ -17,7 +18,6 @@ client.on('message', message => {
                              '```');
   	}
     else if (message.content === '/help' || message.content === '/h') {
-        message.delete();
     	message.channel.send('```css\n' +
                              'Info - write the following commands inbetween the brackets to check/update your information:' + '\n' + '\n' +
                              '[/help] or [/h] ' + ' \n' +
