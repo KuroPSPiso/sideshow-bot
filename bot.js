@@ -8,14 +8,14 @@ client.on('ready', () => {
 
 //handlemsg
 client.on('message', message => {
-    if (message.content === 'ping') {
-    	message.channel.send('PONG!');
+    if (message.content === '/stats') {
+    	message.channel.send('```' + message.author.id + '\n```');
   	}
 });
 
 client.on('message', message => {
-    if (message.content === 'bing') {
-    	message.reply('BONG!');
+    if (message.content === '/username') {
+    	message.reply(message.author.username);
   	}
 });
 
