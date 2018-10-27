@@ -20,7 +20,8 @@ client.on('message', message => {
 
 client.on('message', message => {
     if (message.content === '/help' || message.content === '/h') {
-    	message.channel.send('```csharp' + 
+    	message.channel.send('```csharp\n' +
+                             '#Write the following commands inbetween the brackets to check/update your information.' + '\n'+
                              '[/username] ' + 'check your current ingame username' + ' \n' +
                              '[/username <new username>] ' + 'change your ingame username \'warning this is not immediately effective, please contact a mod when you do in #help-channel.\'' + ' \n' +
                              '```');
