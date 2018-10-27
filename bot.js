@@ -13,7 +13,7 @@ client.on('message', message => {
         message.delete();
     }
     
-    let t_content = message.content;
+    var t_content = message.content;
     t_content = t_content.replace("  ", " ");
     
     //Debug
