@@ -12,11 +12,21 @@ client.on('ready', () => {
     console.log('向こうへ入るに!');
 });
 
-//connected
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
+function dbCMD(sql){
+  con.connect(function(err) {
+    if (err) return false;
+    console.log("Connected!");
+    con.query(sql, function (err, result){
+      if(err) return false;
+      return true;
+    });
+  });
+}
+
+function dbGetUsername()
+{
+  var sql = "";
+}
 
 function updateUsername()
 {
@@ -80,8 +90,12 @@ client.on('message', message => {
     else if (t_content.startsWith('/write ') === true){
         message.channel.send(t_content.substring(6));
     }
-    else if (t_content.startsWith('/UpdateList') === true){
+    else if (t_content === '/updateList'){
         setDiscordIds(message);
+    }
+    else if (t_contect === '/channel')
+    {
+        message.channel.send("channel id: " + message.channel.id);
     }
 });
 
