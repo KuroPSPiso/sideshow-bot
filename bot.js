@@ -37,12 +37,12 @@ client.on('message', message => {
                              'to change your ingame username (warning this is not immediately effective, please contact a mod when you do in #help-channel)' + ' \n' + ' \n' +
                              '```');
   	}
-    else if (t_content === '/username') {
-    	message.reply(message.author.username);
-  	}
     else if (t_content.startsWith('/username ') === true){
         message.replay("feature not yet available");
     }
+    else if (t_content === '/username') {
+    	message.reply(message.author.username);
+  	}
     else if (t_content.startsWith('/write ') === true){
         message.channel.send(t_content.substring(6));
     }
