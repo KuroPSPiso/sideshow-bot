@@ -13,9 +13,12 @@ client.on('message', message => {
         message.delete();
     }
     
+    let t_content = message.content;
+    t_content = t_content.replace("  ", " ");
+    
     //Debug
     //message.channel.send(message.author.id);
-    if (message.content === '/stats') {
+    if (t_content === '/stats') {
     	message.channel.send('```' + 
                              'id: ' + message.author.id + '\n' +
                              'username: ' + message.author.username + '\n' +
@@ -23,7 +26,7 @@ client.on('message', message => {
                              'created at: ' + message.author.createdAt + '\n' +
                              '```');
   	}
-    else if (message.content === '/help' || message.content === '/h') {
+    else if (t_content === '/help' || message.content === '/h') {
     	message.channel.send('```css\n' +
                              'Info - write the following commands inbetween the brackets to check/update your information:' + '\n' + '\n' +
                              '[/help] or [/h] ' + ' \n' +
@@ -34,9 +37,15 @@ client.on('message', message => {
                              'to change your ingame username (warning this is not immediately effective, please contact a mod when you do in #help-channel)' + ' \n' + ' \n' +
                              '```');
   	}
-    else if (message.content === '/username') {
+    else if (t_content === '/username') {
     	message.reply(message.author.username);
   	}
+    else if (t_content.startsWith('/username ') === true){
+        message.replay("feature not yet available");
+    }
+    else if (t_content.startsWith('/write ') === true){
+        message.channel.send(t_content.substring(6, t_content.length - 7);
+    }
 });
 
 //Token set via environment keys 
