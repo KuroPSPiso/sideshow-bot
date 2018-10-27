@@ -8,7 +8,8 @@ client.on('ready', () => {
 
 //handlemsg
 client.on('message', message => {
-    message.delete();
+    //message.delete();
+    message.author.id();
     if (message.content === '/stats') {
     	message.channel.send('```' + 
                              'id: ' + message.author.id + '\n' +
