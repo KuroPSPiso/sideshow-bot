@@ -16,23 +16,17 @@ client.on('message', message => {
                              'created at: ' + message.author.createdAt + '\n' +
                              '```');
   	}
-});
-
-client.on('message', message => {
-    if (message.content === '/help' || message.content === '/h') {
+    else if (message.content === '/help' || message.content === '/h') {
         message.delete();
     	message.channel.send('```css\n' +
-                             'Info - write the following commands inbetween the brackets to check/update your information:' + '\n'+
-                             '"/username" ' + ' \n' +
+                             'Info - write the following commands inbetween the brackets to check/update your information:' + '\n' + '\n' +
+                             '[/username] ' + ' \n' +
                              'to check your current ingame username' + ' \n' +' \n' +
-                             '"/username <new username>" '  + ' \n' +
+                             '[/username <new username>] '  + ' \n' +
                              'to change your ingame username (warning this is not immediately effective, please contact a mod when you do in #help-channel)' + ' \n' + ' \n' +
                              '```');
   	}
-});
-
-client.on('message', message => {
-    if (message.content === '/username') {
+    else if (message.content === '/username') {
     	message.reply(message.author.username);
   	}
 });
