@@ -14,7 +14,7 @@ client.on('message', message => {
                              'username: ' + message.author.username + '\n' +
                              'discriminator: ' + message.author.discriminator + '\n' +
                              'created at: ' + message.author.createdAt + '\n' +
-                             ```');
+                             '```');
   	}
 });
 
