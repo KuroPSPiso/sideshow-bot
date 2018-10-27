@@ -21,7 +21,7 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.content === '/help' || message.content === '/h') {
         message.delete();
-    	message.channel.send('```csharp\n' +
+    	message.channel.send('```css\n' +
                              'Info - write the following commands inbetween the brackets to check/update your information:' + '\n'+
                              '"/username" ' + ' \n' +
                              'to check your current ingame username' + ' \n' +' \n' +
