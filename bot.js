@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const mysql = require('mysql');
 const client = new Discord.Client();
 const dbCon = mysql.createConnection({
-  host: process.env.DB_SERVER,
+  host: 'bogaardryan.com.mysql:3306',
   user: process.env.DB_USERNAME,
   password: process.env.DB_TOKEN
 });
