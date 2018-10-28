@@ -93,7 +93,7 @@ client.on('message', message => {
     else if (t_content === '/updateList'){
         setDiscordIds(message);
     }
-    else if (t_contect === '/channel')
+    else if (t_content === '/channel')
     {
         message.channel.send("channel id: " + message.channel.id);
     }
