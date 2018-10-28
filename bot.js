@@ -14,10 +14,16 @@ client.on('ready', () => {
 
 function dbCMD(sql){
   dbCon.connect(function(err) {
-    if (err) return false;
-    console.log("Connected!");
+    if (err) {
+      console.log("Failed to connect to db: " + err);
+      return null;
+    }
+    console.log("Connected to db: running query");
     dbCon.query(sql, function (err, result){
-      if(err) return "";
+      if(err){
+        console.log("Failed to exec to query: " + err);
+        return "";
+      }
       return result;
     });
   });
@@ -27,6 +33,7 @@ function dbGetUsername(message)
 {
   var sql = "SELECT `mc`.`playerName` FROM `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND "+
       " `p`.`discordId` = '" + message.author.discriminator + "' AND `p`.`discordName` = '" + message.author.username + "'";
+  console.log(message.author.id + " exec: GetUsername");
   return dbCMD(sql);
 }
 
