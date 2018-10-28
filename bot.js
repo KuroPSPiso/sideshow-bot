@@ -17,15 +17,17 @@ function dbCMD(sql){
     if (err) return false;
     console.log("Connected!");
     con.query(sql, function (err, result){
-      if(err) return false;
-      return true;
+      if(err) return "";
+      return result;
     });
   });
 }
 
-function dbGetUsername()
+function dbGetUsername(message)
 {
-  var sql = "";
+  var sql = "SELECT `mc`.`playerName` FROM `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND "+
+      " `p`.`discordId` = '" + message.author.discriminator + "' AND `p`.`discordName` = '" + message.author.username + "'";
+  console.log(sql);
 }
 
 function updateUsername()
@@ -35,8 +37,17 @@ function updateUsername()
 
 function fetchUsername(message)
 {
-    message.reply(message.author.username);
+  let result = dbGetUsername(message);
+  if(result === "" || result === NULL)
+  {
+    message.reply("in-game username for Minecraft not found, please add one using `/username <your new username>`.");
     return false;
+  }
+  else
+  {
+    message.reply(result);
+    return true;
+  }
 }
 
 function setDiscordIds(message)
