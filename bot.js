@@ -7,6 +7,22 @@ const dbCon = mysql.createConnection({
   password: process.env.DB_TOKEN
 });
 
+let connection = mysql.createConnection({
+    host: 'bogaardryan.com.mysql',
+    user: process.env.DB_USERNAME,
+    port: '3306',  /* port on which phpmyadmin run */
+    password: process.env.DB_TOKEN,
+    database: 'bogaardryan_com'
+});
+
+connection.connect(function(err) {
+    if (err) {
+      return console.error('error: ' + err.message);
+    }
+
+    console.log('Connected to the MySQL server.');
+  });
+
 //connected
 client.on('ready', () => {
     console.log('向こうへ入るに!');
