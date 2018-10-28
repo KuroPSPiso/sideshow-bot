@@ -13,10 +13,10 @@ client.on('ready', () => {
 });
 
 function dbCMD(sql){
-  con.connect(function(err) {
+  dbCon.connect(function(err) {
     if (err) return false;
     console.log("Connected!");
-    con.query(sql, function (err, result){
+    dbCon.query(sql, function (err, result){
       if(err) return "";
       return result;
     });
