@@ -12,7 +12,8 @@ let connection = mysql.createConnection({
     user: process.env.DB_USERNAME,
     port: '3306',  /* port on which phpmyadmin run */
     password: process.env.DB_TOKEN,
-    database: 'bogaardryan_com'
+    database: 'bogaardryan_com',
+  debug: 'true'
 });
 
 connection.connect(function(err) {
