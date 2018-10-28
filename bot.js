@@ -8,7 +8,7 @@ const dbCon = mysql.createConnection({
 });
 
 let connection = mysql.createConnection({
-    host: 'bogaardryan.com.mysql',
+    host: 'https://bogaardryan.com.mysql',
     user: process.env.DB_USERNAME,
     port: '3306',  /* port on which phpmyadmin run */
     password: process.env.DB_TOKEN,
