@@ -71,7 +71,7 @@ function dbGetUsername(message)
   handleUsername(message, sql);
 }
 
-function handleUsername(msg, sql)
+function handleUsername(msg, sqlData)
 {
 	request.post('http://bogaardryan.com/whitelist/sql-manager.php',
 	   {form: { sql : sqlData } },
