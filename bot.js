@@ -82,10 +82,10 @@ function checkUsernameBeforeUpdate(msg, username, sqlData)
 		function(err, result, body){
 			if(err || !body || body === "") msg.reply("failed to verify username");
 			else {
-				msg.reply("username found in minecraft database, changing username to **" + username + "**.");
 				console.log("username check positive: " + body);
 				
 				var obj = JSON.parse(body);
+				msg.reply("username found in minecraft database, changing username to **" + obj.name + "**.");
 				
 				handleUsernameUpdate(msg, obj.name, sqlData);
 			}
