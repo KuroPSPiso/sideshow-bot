@@ -84,7 +84,10 @@ function checkUsernameBeforeUpdate(msg, username, sqlData)
 			else {
 				msg.reply("username found in minecraft database, changing username to **" + username + "**.");
 				console.log("username check positive: " + body);
-				handleUsernameUpdate(msg, username, sqlData);
+				
+				var obj = JSON.parse(sqlReturn);
+				
+				handleUsernameUpdate(msg, obj.name, sqlData);
 			}
 		});
 }
