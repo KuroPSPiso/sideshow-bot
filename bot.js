@@ -15,12 +15,12 @@ function dbCMD(sqlData){
 		if(err)
 		{ 
 			console.log("failed to return val: " + err);
-			return false;
+			return body.slice(1, -1);
 		}
 		else 
 		{
 			console.log("return val: " + body + " | " + result + " | " + body);
-			return body;
+			return body.slice(1, -1);
 		}
 	});
   /*
