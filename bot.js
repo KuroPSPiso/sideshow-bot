@@ -87,11 +87,11 @@ function handleUsername(msg, sqlData)
 			//msg.body;//.slice(1, -1);
 			if(body === "" || body === null || body === "false")
 			{
-				message.reply("in-game username for Minecraft not found, please add one using `/username <your new username>`.");
+				msg.reply("in-game username for Minecraft not found, please add one using `/username <your new username>`.");
 			}
 			else
 			{
-				message.reply(body);
+				msg.reply(body);
 			}
 		}
 	});
