@@ -3,11 +3,15 @@ const mysql = require('mysql');
 const request = require('request');
 const client = new Discord.Client();
 
-const self = { id : 505756739652550656 };
+const self = { 
+id : 505756739652550656,
+debug-pixelmon : 506892880246341649
+};
 
 //connected
 client.on('ready', () => {
     console.log('向こうへ入るに!');
+	client.channels.get(506892880246341649).send("向こうへ入るに!")
 });
 
 function dbCMD(sqlData){
@@ -30,21 +34,6 @@ function dbCMD(sqlData){
 			return body;//.slice(1, -1);
 		}
 	});
-  /*
-  dbCon.connect(function(err) {
-    if (err) {
-      console.log("Failed to connect to db: " + err);
-      return null;
-    }
-    console.log("Connected to db: running query");
-    dbCon.query(sql, function (err, result){
-      if(err){
-        console.log("Failed to exec to query: " + err);
-        return "";
-      }
-      return result;
-    });
-  });*/
 }
 
 function dbResultError(sqlReturn)
@@ -86,7 +75,6 @@ function handleUsername(msg, sqlData)
 		else 
 		{
 			console.log("return val: " + body + " | " + result + " | " + body);
-			//msg.body;//.slice(1, -1);
 			if(body === "" || body === null || body === "false")
 			{
 				msg.reply("in-game username for Minecraft not found, please add one using `/username <your new username>`.");
@@ -114,43 +102,6 @@ function handleUsername(msg, sqlData)
 		}
 	});
 }
-
-/*
-function dbGetUsername(message)
-{
-  	var sql = "SELECT `mc`.`playerName` FROM `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
-  	"`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
-  	"`p`.`discordName` = '" + message.author.username  + "'";
-  	console.log(message.author.id + " exec: GetUsername");
-  	var sqlReturn = dbCMD(sql);
-	
-	while(!sqlReturn)
-	{
-		//wait for value?
-	}
-	
-	console.log(message.author.id + " result raw: GetUsername = " + sqlReturn);
-	
-	var err = false;
-	if(err = dbResultError(sqlReturn))
-	{
-		console.log(message.author.id + " has err result: GetUsername = " + err);
-		//has error	
-		var obj = JSON.parse(sqlReturn);
-  		console.log(message.author.id + " err result: GetUsername = " + obj.msg);
-		return false;
-	}
-	else
-	{
-		console.log(message.author.id + " has err result: GetUsername = " + err);
-		//has succeeded
-		var obj = JSON.parse(sqlReturn);
-  		console.log(message.author.id + " result: GetUsername = " + obj.playerName);
-		return obj.playerName;
-	}
-	
-	return false;
-}*/
 
 function updateUsername()
 {
@@ -208,7 +159,7 @@ client.on('message', message => {
         message.reply("feature not yet available");
     }
     else if (t_content === '/username') {
-    	fetchUsername(message);
+    	dbGetUsername(message);
   	}
     else if (t_content.startsWith('/write ') === true){
         message.channel.send(t_content.substring(6));
