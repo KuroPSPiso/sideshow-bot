@@ -9,34 +9,20 @@ client.on('ready', () => {
 });
 
 function dbCMD(sqlData){
-  var jsonData = { 'sql': sqlData };
-  var formData = {
-    sql: sqlData,
-  };
-    
-  var formDataSTR = querystring.stringify(formData);
-  var contentLength = formDataSTR.length;
-    
-  request({
-    headers: {
-      'Content-Length': contentLength,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    url: 'http://bogaardryan.com/whitelist/sql-manager.php',
-    method: 'POST',
-    body: formDataSTR
-  }, function(err, result, body){
-    if(err)
-    { 
-      console.log("failed to return val: " + err);
-      return false;
-    }
-    else 
-    {
-      console.log("return val: " + body + " | " + result + " | " + body);
-      return true;
-    }
-  })
+	request.post('http://bogaardryan.com/whitelist/sql-manager.php',
+	   {form: { sql : sqlData } },
+	   function(err, result, body){
+		if(err)
+		{ 
+			console.log("failed to return val: " + err);
+			return false;
+		}
+		else 
+		{
+			console.log("return val: " + body + " | " + result + " | " + body);
+			return true;
+		}
+	});
   /*
   dbCon.connect(function(err) {
     if (err) {
