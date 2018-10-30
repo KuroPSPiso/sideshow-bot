@@ -11,8 +11,6 @@ debug_pixelmon : 506892880246341649
 //connected
 client.on('ready', () => {
 	console.log('向こうへ入るに!');
-	var channel = client.channels.get("id", self.debug_pixelmon); //.send('向こうへ入るに!');
-	console.log('debug channel set: ' + JSON.stringify(client.channels));
 });
 
 function dbCMD(sqlData){
@@ -63,6 +61,36 @@ function dbGetUsername(message)
   handleUsername(message, sql);
 }
 
+function dbUpdateUsername(message)
+{
+  var sql = "SELECT `mc`.`playerName` FROM `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
+  "`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
+  "`p`.`discordName` = '" + message.author.username  + "'";
+  
+  var new_username = message.content;
+  new_username = new_username.replace(" ", ""); //remove spaces
+  new_username = new_username.substr(9); //rightshift 9 characters '/username'
+  
+  console.log(message.author.id + " exec: UpdateUsername");
+  checkUsernameBeforeUpdate(message, new_username, sql);
+}
+
+function checkUsernameBeforeUpdate(msg, username, sqlData)
+{
+	request.get('https://api.mojang.com/users/profiles/minecraft/' + username,
+		function(err, result, body){
+			if(err || !body || body === "") msg.reply("failed to verify username");
+			else {
+				console.log("username check positive: " + body);
+			}
+		});
+}
+
+function handleUsernameUpdate(msg, username, sqlData)
+{
+
+}
+
 function handleUsername(msg, sqlData)
 {
 	request.post('http://bogaardryan.com/whitelist/sql-manager.php',
@@ -109,11 +137,6 @@ function updateUsername()
     return false;
 }
 
-function fetchUsername(message)
-{
-  dbGetUsername(message);
-}
-
 function setDiscordIds(message)
 {
     message.channel.send('updating list');
@@ -156,8 +179,8 @@ client.on('message', message => {
                              'to change your ingame username (warning this is not immediately effective, please contact a mod when you do in #help-channel)' + ' \n' + ' \n' +
                              '```');
   	}
-    else if (t_content.startsWith('/username ') === true){
-        message.reply("feature not yet available");
+    else if (t_content.startsWith('/username ') === true && t_content.length > 10){
+        dbUpdateUsername(message);
     }
     else if (t_content === '/username') {
     	dbGetUsername(message);
