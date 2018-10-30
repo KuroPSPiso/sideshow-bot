@@ -8,13 +8,23 @@ client.on('ready', () => {
     console.log('向こうへ入るに!');
 });
 
-function dbCMD(sql){
-  var jsonData = { 'sql': sql };
-  request.post({
+function dbCMD(sqlData){
+  var jsonData = { 'sql': sqlData };
+  var formData = {
+    sql: sqlData,
+  };
+    
+  var formDataSTR = querystring.stringify(formData);
+  var contentLength = formDataSTR.length;
+    
+  request({
+    headers: {
+      'Content-Length': contentLength,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
     url: 'http://bogaardryan.com/whitelist/sql-manager.php',
-    headers: {'content-type': 'application/json'},
     method: 'POST',
-    json: jsonData
+    body: formDataSTR
   }, function(err, result, body){
     if(err)
     { 
