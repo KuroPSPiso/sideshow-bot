@@ -68,9 +68,14 @@ function dbUpdateUsername(message)
   new_username = new_username.replace(" ", ""); //remove spaces
   new_username = new_username.substr(9); //rightshift 9 characters '/username'
   
-  var sql = "UPDATE `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` SET `mc`.`playerName` = '" + new_username + "' WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
+  /*var sql = "UPDATE `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` SET `mc`.`playerName` = '" + new_username + "' WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
   "`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
-  "`p`.`discordName` = '" + message.author.username  + "'";
+  "`p`.`discordName` = '" + message.author.username  + "'";*/
+	var sql = "UPDATE `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` SET `mc`.`playerName` = '" + new_username + "' FROM (SELECT `o`.`playerName` FROM `crikMinecraft` o WHERE (`o`.`playerId` = `p`.`playerId`) omc" +
+  "WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
+  "`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
+  "`p`.`discordName` = '" + message.author.username  + "'" +
+  "RETURNING `omc`.`playerName";
   
   console.log(message.author.id + " exec: UpdateUsername");
   checkUsernameBeforeUpdate(message, new_username, sql);
