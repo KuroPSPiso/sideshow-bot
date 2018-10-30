@@ -15,12 +15,12 @@ function dbCMD(sqlData){
 		if(err)
 		{ 
 			console.log("failed to return val: " + err);
-			return body.slice(1, -1);
+			return body;//.slice(1, -1);
 		}
 		else 
 		{
 			console.log("return val: " + body + " | " + result + " | " + body);
-			return body.slice(1, -1);
+			return body;//.slice(1, -1);
 		}
 	});
   /*
@@ -63,7 +63,7 @@ function dbGetUsername(message)
   	"`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
   	"`p`.`discordName` = '" + message.author.username  + "'";
   	console.log(message.author.id + " exec: GetUsername");
-  	var resultSTR = dbCMD(sql);
+  	var sqlReturn = dbCMD(sql);
 	
 	if(dbResultError())
 	{
