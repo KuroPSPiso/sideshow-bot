@@ -3,6 +3,8 @@ const mysql = require('mysql');
 const request = require('request');
 const client = new Discord.Client();
 
+const self = { id : 505756739652550656 };
+
 //connected
 client.on('ready', () => {
     console.log('向こうへ入るに!');
@@ -173,7 +175,7 @@ function addUser()
 
 //handlemsg
 client.on('message', message => {
-    if(message.author.id != 505756739652550656)
+    if(message.author.id != self.id)
     {
         message.delete();
     }
