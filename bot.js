@@ -64,6 +64,18 @@ function dbResultError(sqlReturn)
 
 function dbGetUsername(message)
 {
+  var sql = "SELECT `mc`.`playerName` FROM `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND" +
+  var sql = "SELECT `mc`.`playerName` FROM `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
+  "`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
+  " `p`.`discordName` = '" + message.author.username  + "'";
+  "`p`.`discordName` = '" + message.author.username  + "'";
+  console.log(message.author.id + " exec: GetUsername");
+  return dbCMD(sql);
+}
+
+/*
+function dbGetUsername(message)
+{
   	var sql = "SELECT `mc`.`playerName` FROM `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
   	"`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
   	"`p`.`discordName` = '" + message.author.username  + "'";
@@ -96,7 +108,7 @@ function dbGetUsername(message)
 	}
 	
 	return false;
-}
+}*/
 
 function updateUsername()
 {
