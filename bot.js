@@ -65,7 +65,7 @@ function dbGetUsername(message)
   	console.log(message.author.id + " exec: GetUsername");
   	var sqlReturn = dbCMD(sql);
 	
-	if(dbResultError())
+	if(dbResultError(sqlReturn))
 	{
 		//has error	
 		var obj = JSON.parse(sqlReturn);
