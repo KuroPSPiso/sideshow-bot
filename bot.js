@@ -116,6 +116,9 @@ function updateUsername()
 function fetchUsername(message)
 {
   let result = dbGetUsername(message);
+	
+	console.log("let result: " + result);
+	
   if(result === "" || result === null || result === "false")
   {
     message.reply("in-game username for Minecraft not found, please add one using `/username <your new username>`.");
