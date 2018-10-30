@@ -70,6 +70,11 @@ function dbGetUsername(message)
   	console.log(message.author.id + " exec: GetUsername");
   	var sqlReturn = dbCMD(sql);
 	
+	while(!sqlReturn)
+	{
+		//wait for value?
+	}
+	
 	console.log(message.author.id + " result raw: GetUsername = " + sqlReturn);
 	
 	var err = false;
