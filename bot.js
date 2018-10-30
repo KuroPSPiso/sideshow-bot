@@ -13,6 +13,7 @@ function dbCMD(sql){
   request.post({
     url: 'http://bogaardryan.com/whitelist/sql-manager.php',
     headers: {'content-type': 'application/json'},
+    method: 'POST',
     json: jsonData
   }, function(err, result, body){
     if(err)
