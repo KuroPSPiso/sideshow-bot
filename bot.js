@@ -92,6 +92,7 @@ function handleUsername(msg, sqlData)
 			else
 			{
 				var sqlReturn = body;
+				sqlReturn = sqlReturn.slice(1, -1);
 				var obj = JSON.parse(sqlReturn);
 				console.log(obj);
 				if(err = dbResultError(sqlReturn))
