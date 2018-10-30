@@ -68,7 +68,12 @@ function dbGetUsername(message)
   "`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
   "`p`.`discordName` = '" + message.author.username  + "'";
   console.log(message.author.id + " exec: GetUsername");
-  return dbCMD(sql);
+  handleUsername(message, dbCMD(sql));
+}
+
+function handleUsername(msg, callback)
+{
+	console.log("testing callback " + msg.author.username  + ", " + callback;
 }
 
 /*
