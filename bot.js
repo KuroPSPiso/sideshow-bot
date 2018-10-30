@@ -12,8 +12,8 @@ function dbCMD(sql){
   var jsonData = { 'sql': sql };
   request.post({
     url: 'http://bogaardryan.com/whitelist/sql-manager.php',
-    body: jsonData,
-    json: true
+    headers: {'content-type': 'application/json'},
+    json: jsonData
   }, function(err, result, body){
     if(err)
     { 
