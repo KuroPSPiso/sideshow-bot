@@ -123,7 +123,7 @@ function handleUsernameUpdate(msg, username, sqlData)
 				{
 					//has succeeded
 					console.log(msg.author.id + " result: GetUsername = " + obj.playerName);
-					msg.reply(obj.playerName);
+					msg.reply("username set to, '" + username + "' in database.");
 				}
 			}
 		}
