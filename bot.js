@@ -20,7 +20,7 @@ function dbCMD(sqlData){
 		else 
 		{
 			console.log("return val: " + body + " | " + result + " | " + body);
-			return true;
+			return body;
 		}
 	});
   /*
@@ -40,13 +40,47 @@ function dbCMD(sqlData){
   });*/
 }
 
+function dbResultError(sqlReturn)
+{
+	var obj = JSON.parse(sqlReturn);
+	if(obj.err)
+	{
+		if(obj.err === true)
+		{	
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	return false;
+}
+
 function dbGetUsername(message)
 {
-  var sql = "SELECT `mc`.`playerName` FROM `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
-  "`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
-  "`p`.`discordName` = '" + message.author.username  + "'";
-  console.log(message.author.id + " exec: GetUsername");
-  return dbCMD(sql);
+  	var sql = "SELECT `mc`.`playerName` FROM `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
+  	"`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
+  	"`p`.`discordName` = '" + message.author.username  + "'";
+  	console.log(message.author.id + " exec: GetUsername");
+  	var resultSTR = dbCMD(sql);
+	
+	if(dbResultError())
+	{
+		//has error	
+		var obj = JSON.parse(sqlReturn);
+  		console.log(message.author.id + " err result: GetUsername = " + obj.msg);
+		return false;
+	}
+	else
+	{
+		//has succeeded
+		var obj = JSON.parse(sqlReturn);
+  		console.log(message.author.id + " result: GetUsername = " + obj.playerName);
+		return obj.playerName;
+	}
+	
+	return false;
 }
 
 function updateUsername()
@@ -57,7 +91,7 @@ function updateUsername()
 function fetchUsername(message)
 {
   let result = dbGetUsername(message);
-  if(result === "" || result === null)
+  if(result === "" || result === null || result === "false")
   {
     message.reply("in-game username for Minecraft not found, please add one using `/username <your new username>`.");
     return false;
