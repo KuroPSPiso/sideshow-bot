@@ -100,14 +100,13 @@ function handleUsername(msg, sqlData)
 					console.log(msg.author.id + " has err result: GetUsername = " + err);
 					//has error	
 					console.log(msg.author.id + " err result: GetUsername = " + obj.msg);
-					return false;
+					msg.reply("in-game username for Minecraft not found, please add one using `/username <your new username>`.");
 				}
 				else
 				{
-					console.log(msg.author.id + " has err result: GetUsername = " + err);
 					//has succeeded
 					console.log(msg.author.id + " result: GetUsername = " + obj.playerName);
-					return obj.playerName;
+					msg.reply(obj.playerName);
 				}
 			}
 		}
