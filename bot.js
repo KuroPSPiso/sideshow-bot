@@ -10,8 +10,8 @@ debug_pixelmon : 506892880246341649
 
 //connected
 client.on('ready', () => {
-    console.log('向こうへ入るに!');
-	client.channels.get(self.debug_pixelmon).send("向こうへ入るに!")
+	console.log('向こうへ入るに!');
+	client.channels.get(self.debug_pixelmon).send("向こうへ入るに!");
 });
 
 function dbCMD(sqlData){
