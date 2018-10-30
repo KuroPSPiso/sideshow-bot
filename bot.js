@@ -11,7 +11,7 @@ debug_pixelmon : 506892880246341649
 //connected
 client.on('ready', () => {
 	console.log('向こうへ入るに!');
-	client.channels.find(self.debug_pixelmon).send('向こうへ入るに!');
+	client.channels.find("id", self.debug_pixelmon).send('向こうへ入るに!');
 });
 
 function dbCMD(sqlData){
