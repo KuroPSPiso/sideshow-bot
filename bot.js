@@ -91,7 +91,23 @@ function handleUsername(msg, sqlData)
 			}
 			else
 			{
-				msg.reply(body);
+				var sqlReturn = body;
+				if(err = dbResultError(sqlReturn))
+				{
+					console.log(msg.author.id + " has err result: GetUsername = " + err);
+					//has error	
+					var obj = JSON.parse(sqlReturn);
+					console.log(msg.author.id + " err result: GetUsername = " + obj.msg);
+					return false;
+				}
+				else
+				{
+					console.log(msg.author.id + " has err result: GetUsername = " + err);
+					//has succeeded
+					var obj = JSON.parse(sqlReturn);
+					console.log(msg.author.id + " result: GetUsername = " + obj.playerName);
+					return obj.playerName;
+				}
 			}
 		}
 	});
