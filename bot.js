@@ -68,12 +68,33 @@ function dbGetUsername(message)
   "`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
   "`p`.`discordName` = '" + message.author.username  + "'";
   console.log(message.author.id + " exec: GetUsername");
-  handleUsername(message, dbCMD(sql));
+  handleUsername(message, sql);
 }
 
-function handleUsername(msg, callback)
+function handleUsername(msg, sql)
 {
-	console.log("testing callback " + msg.author.username  + ", " + callback);
+	request.post('http://bogaardryan.com/whitelist/sql-manager.php',
+	   {form: { sql : sqlData } },
+	   function(err, result, body){
+				
+		if(err)
+		{ 
+			msg.reply("username not found and or service not operational");
+		}
+		else 
+		{
+			console.log("return val: " + body + " | " + result + " | " + body);
+			//msg.body;//.slice(1, -1);
+			if(body === "" || body === null || body === "false")
+			{
+				message.reply("in-game username for Minecraft not found, please add one using `/username <your new username>`.");
+			}
+			else
+			{
+				message.reply(body);
+			}
+		}
+	});
 }
 
 /*
@@ -120,20 +141,7 @@ function updateUsername()
 
 function fetchUsername(message)
 {
-  let result = dbGetUsername(message);
-	
-	console.log("let result: " + result);
-	
-  if(result === "" || result === null || result === "false")
-  {
-    message.reply("in-game username for Minecraft not found, please add one using `/username <your new username>`.");
-    return false;
-  }
-  else
-  {
-    message.reply(result);
-    return true;
-  }
+  dbGetUsername(message);
 }
 
 function setDiscordIds(message)
