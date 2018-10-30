@@ -63,13 +63,14 @@ function dbGetUsername(message)
 
 function dbUpdateUsername(message)
 {
-  var sql = "SELECT `mc`.`playerName` FROM `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
-  "`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
-  "`p`.`discordName` = '" + message.author.username  + "'";
   
   var new_username = message.content;
   new_username = new_username.replace(" ", ""); //remove spaces
   new_username = new_username.substr(9); //rightshift 9 characters '/username'
+  
+  var sql = "UPDATE `crikMinecraft` mc INNER JOIN `crikPlayer` p ON `p`.`id` = `mc`.`playerId` SET `mc`.`playerName` = '" + new_username + "' WHERE ((`mc`.`active` = 1) OR (`p`.`moderator` = 1)) AND " +
+  "`p`.`discordId` = '" + message.author.discriminator + "' AND " + 
+  "`p`.`discordName` = '" + message.author.username  + "'";
   
   console.log(message.author.id + " exec: UpdateUsername");
   checkUsernameBeforeUpdate(message, new_username, sql);
@@ -81,14 +82,52 @@ function checkUsernameBeforeUpdate(msg, username, sqlData)
 		function(err, result, body){
 			if(err || !body || body === "") msg.reply("failed to verify username");
 			else {
+				msg.reply("username found in minecraft database, changing username to **" + username + "**.");
 				console.log("username check positive: " + body);
+				handleUsernameUpdate(msg, username, sqlData);
 			}
 		});
 }
 
 function handleUsernameUpdate(msg, username, sqlData)
 {
-
+	request.post('http://bogaardryan.com/whitelist/sql-manager.php',
+	   {form: { sql : sqlData } },
+	   function(err, result, body){
+				
+		if(err)
+		{ 
+			msg.reply("username not found and or service not operational");
+		}
+		else 
+		{
+			console.log("return val: " + body + " | " + result + " | " + body);
+			if(body === "" || body === null || body === "false")
+			{
+				msg.reply("failed to set the new name in database, please try again later.");
+			}
+			else
+			{
+				var sqlReturn = body;
+				sqlReturn = sqlReturn.slice(1, -1);
+				var obj = JSON.parse(sqlReturn);
+				console.log(obj);
+				if(err = dbResultError(sqlReturn))
+				{
+					console.log(msg.author.id + " has err result: GetUsername = " + err);
+					//has error	
+					console.log(msg.author.id + " err result: GetUsername = " + obj.msg);
+					msg.reply("failed to set the new name in database, please try again later`.");
+				}
+				else
+				{
+					//has succeeded
+					console.log(msg.author.id + " result: GetUsername = " + obj.playerName);
+					msg.reply(obj.playerName);
+				}
+			}
+		}
+	});
 }
 
 function handleUsername(msg, sqlData)
