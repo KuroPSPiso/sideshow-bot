@@ -1,28 +1,7 @@
 const Discord = require('discord.js');
 const mysql = require('mysql');
+const request = require('request');
 const client = new Discord.Client();
-const dbCon = mysql.createConnection({
-  host: 'bogaardryan.com.mysql:3306',
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_TOKEN
-});
-
-let connection = mysql.createConnection({
-    host: 'https://bogaardryan.com.mysql',
-    user: process.env.DB_USERNAME,
-    port: '3306',  /* port on which phpmyadmin run */
-    password: process.env.DB_TOKEN,
-    database: 'bogaardryan_com',
-  debug: 'true'
-});
-
-connection.connect(function(err) {
-    if (err) {
-      return console.error('error: ' + err.message);
-    }
-
-    console.log('Connected to the MySQL server.');
-  });
 
 //connected
 client.on('ready', () => {
@@ -30,6 +9,24 @@ client.on('ready', () => {
 });
 
 function dbCMD(sql){
+  var jsonData = { 'sql': sql };
+  request.post({
+    url: 'http://bogaardryan.com/whitelist/sql-manager.php',
+    body: jsonData,
+    json: true
+  }, function(err, result, body){
+    if(err)
+    { 
+      console.log("failed to return val: " + err);
+      return false;
+    }
+    else 
+    {
+      console.log("return val: " + body + " | " + result + "");
+      return true;
+    }
+  })
+  /*
   dbCon.connect(function(err) {
     if (err) {
       console.log("Failed to connect to db: " + err);
@@ -43,7 +40,7 @@ function dbCMD(sql){
       }
       return result;
     });
-  });
+  });*/
 }
 
 function dbGetUsername(message)
