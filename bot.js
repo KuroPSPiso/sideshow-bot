@@ -5,13 +5,13 @@ const client = new Discord.Client();
 
 const self = { 
 id : 505756739652550656,
-debug-pixelmon : 506892880246341649
+debug_pixelmon : 506892880246341649
 };
 
 //connected
 client.on('ready', () => {
     console.log('向こうへ入るに!');
-	client.channels.get(506892880246341649).send("向こうへ入るに!")
+	client.channels.get(self.debug_pixelmon).send("向こうへ入るに!")
 });
 
 function dbCMD(sqlData){
