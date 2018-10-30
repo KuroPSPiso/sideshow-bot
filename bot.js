@@ -9,9 +9,14 @@ client.on('ready', () => {
 });
 
 function dbCMD(sqlData){
+	console.log("db cmd called");
+	
 	request.post('http://bogaardryan.com/whitelist/sql-manager.php',
 	   {form: { sql : sqlData } },
 	   function(err, result, body){
+		
+		console.log("db cmd executed");
+		
 		if(err)
 		{ 
 			console.log("failed to return val: " + err);
