@@ -22,7 +22,7 @@ function dbCMD(sql){
     }
     else 
     {
-      console.log("return val: " + body + " | " + result + "");
+      console.log("return val: " + body + " | " + result + " | " + body);
       return true;
     }
   })
