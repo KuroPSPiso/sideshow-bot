@@ -73,7 +73,7 @@ function dbGetUsername(message)
 
 function handleUsername(msg, callback)
 {
-	console.log("testing callback " + msg.author.username  + ", " + callback;
+	console.log("testing callback " + msg.author.username  + ", " + callback);
 }
 
 /*
