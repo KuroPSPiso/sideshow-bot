@@ -65,8 +65,12 @@ function dbGetUsername(message)
   	console.log(message.author.id + " exec: GetUsername");
   	var sqlReturn = dbCMD(sql);
 	
-	if(dbResultError(sqlReturn))
+	console.log(message.author.id + " result raw: GetUsername = " + sqlReturn);
+	
+	var err = false;
+	if(err = dbResultError(sqlReturn))
 	{
+		console.log(message.author.id + " has err result: GetUsername = " + err);
 		//has error	
 		var obj = JSON.parse(sqlReturn);
   		console.log(message.author.id + " err result: GetUsername = " + obj.msg);
@@ -74,6 +78,7 @@ function dbGetUsername(message)
 	}
 	else
 	{
+		console.log(message.author.id + " has err result: GetUsername = " + err);
 		//has succeeded
 		var obj = JSON.parse(sqlReturn);
   		console.log(message.author.id + " result: GetUsername = " + obj.playerName);
